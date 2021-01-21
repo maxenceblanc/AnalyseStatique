@@ -1,5 +1,14 @@
 {
-    {id: 1,
-    exp
+    "B1": {
+        "instructions": [{}, {}],
+        "succ": ["B2"],
+        "pred": ["B2", "B3"]
+      },
+
+    "B2": {
+    "instructions": {},
+    "succ": [1,1],
+    "pred": {}
     }
-}
+
+  }
