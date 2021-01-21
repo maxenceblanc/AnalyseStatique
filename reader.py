@@ -38,6 +38,7 @@ class Graph():
         # Initialization
         self.current = None # Block being currently focused, ex: "B1"
 
+        self.expr_collection = list(set([inst[1] for b in self.blocks for inst in self.blocks[b].instructions]))
         # ... extra vars for the algorithm
 
 
@@ -45,6 +46,8 @@ class Graph():
         chaine = "\n".join([self.blocks[block_id].__repr__() for block_id in self.blocks])
         return chaine
 
+    def getCurrentBlock(self):
+        return self.blocks[self.current]
 
     def instructions(self):
         """  Gets the instructions of the current block.
@@ -66,11 +69,21 @@ class Graph():
         """
         return self.blocks[self.current].varIsRedefined(var)
 
+    def getExpressionContain(self, var):
+        """ Get all the expression that contain var
+        """
+        return [expr for expr in self.expr_collection if var in expr]
+
+
     def hasExpression(self, expression):
         """ Calls the hasExpression() on the current block.
         """
         return self.blocks[self.current].hasExpression(expression)
+    def getAllExpressionSelBlock(self):
+        return self.blocks[self.current].getAllExpression()
 
+    def getAllRedefinedVarSelBlock(self):
+        return self.blocks[self.current].getAllRedefinedVar()
 
 class Block():
 
@@ -82,6 +95,10 @@ class Block():
 
         self.pred = pred
         self.succ = succ
+        self.OUT = set()
+        self.IN = set()
+        self.KILL = set()
+        self.GEN = set()
 
     def __repr__(self):
         chaine = f"Block {self.id}\nInstructions:\n"
@@ -91,12 +108,12 @@ class Block():
         return chaine
 
     def varIsRedefined(self, var):
-        """ Checks if blocks has instructions containing a given variable 
+        """ Checks if blocks has instructions containing a given variable
         and returns these instructions.
         """
 
         res = [instruction for instruction in self.instructions if var in instruction[0]]
-       
+
         return res
 
     def hasExpression(self, expression):
@@ -109,6 +126,15 @@ class Block():
 
         return False
 
+    def getAllExpression(self):
+        """Get every expression of the block (instruction[1])
+        """
+        return [instr[1] for instr in self.instructions]
+
+    def getAllRedefinedVar(self):
+        """Get every var redefined in the block (instruction[0])
+        """
+        return [instr[0] for instr in self.instructions]
 ####################################################
 ##################| FUNCTIONS |#####################
 ####################################################
