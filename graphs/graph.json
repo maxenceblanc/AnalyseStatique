@@ -1,59 +1,59 @@
 {
     "B1":{
        "instructions": [
-           {"a": "1"},
-           {"b": "2"}
+           ["a", "1"],
+           ["b", "2"]
        ],
        "succ": ["B2"],
        "pred": []
     },
     "B2": {
-        "instructions": [{
-           "c": "a+b"
-        }],
+        "instructions": [
+            ["c", "a+b"]
+        ],
        "succ": ["B3"],
        "pred": ["B1","B5"]
     },
     "B3": {
-        "instructions": [{
-           "d": "c-a"
-        }],
+        "instructions": [
+           ["d", "c-a"]
+        ],
         "succ": ["B4","B6"],
         "pred": ["B2"]
     },
     "B4": {
-        "instructions": [{
-           "b": "a+b"
-        }],
+        "instructions": [
+           ["b", "a+b"]
+        ],
         "succ": ["B5"],
         "pred": ["B6","B3"]
     },
     "B5": {
-        "instructions": [{
-           "e": "c-a"
-        }],
+        "instructions": [
+           ["e", "c-a"]
+        ],
         "succ": ["B8","B2"],
         "pred": ["B4"]
     },
     "B6": {
-        "instructions": [{
-           "d": "b*d"
-        }],
+        "instructions": [
+           ["d", "b*d"]
+        ],
         "succ": ["B7","B4"],
         "pred": ["B3","B7"]
     },
     "B7": {
         "instructions": [
-            {"d": "a+b"},
-            {"e": "e+1"}
+            ["d", "a+b"],
+            ["e", "e+1"]
         ],
         "succ": ["B6"],
         "pred": ["B6"]
     },
     "B8": {
         "instructions": [
-            {"a": "b*d"},
-            {"b": "a-d"}
+            ["a", "b*d"],
+            ["b", "a-d"]
         ],
         "succ": [],
         "pred": ["B5"]
