@@ -24,6 +24,12 @@ import json
 ####################################################
 
 class Graph():
+    """ Object representation of the graph.
+
+    The methods that have the same name as in the Block() class are utility methods applied
+    to the block marked as 'current' in the graph.
+
+    """
 
     def __init__(self, block_dict):
         
@@ -39,6 +45,11 @@ class Graph():
         chaine = "\n".join([self.blocks[block_id].__repr__() for block_id in self.blocks])
         return chaine
 
+
+    def instructions(self):
+        """  Gets the instructions of the current block.
+        """ 
+        return self.blocks[self.current].instructions
 
     def pred(self):
         """ Gets pred of the current block.
@@ -147,6 +158,7 @@ if __name__ == '__main__':
     # Example : Checks which expressions of B8 contain variable "d"
     # graph.blocks["B8"].varIsRedefined("d")
 
-    graph.current = "B2"
-    print(graph.varIsRedefined("c"))
-    print(graph.hasExpression("a+b"))
+    graph.current = "B7"
+    print(graph.instructions())
+    print(graph.varIsRedefined("e"))
+    print(graph.hasExpression("e+1"))
