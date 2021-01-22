@@ -1,25 +1,25 @@
 #! /usr/bin/env python
 import reader
 
-GRAPH_FILE = "graphs/graph3.json"
+GRAPH_FILE = "graphs/graph.json"
 block_dict = reader.parseFile(GRAPH_FILE)
 graph = reader.Graph(block_dict)
 
 # %%
-# Construct Kill and Gen sets for each blocks
+#Construct Kill and Gen sets for each blocks
 for block in graph.blocks:
     graph.current = graph.blocks[block].id
     b = graph.getCurrentBlock()
-
-    # https://www.seas.upenn.edu/~mhnaik/edu/cis700/lessons/dataflow_analysis.pdf
-    # Gen = every expression of the program
     b.GEN = set(b.getAllExpression())
-    # kill = every expression where a variable is redefined in b
-    b.KILL = set([expr for var in b.getAllRedefinedVar() for expr in graph.getExpressionContain(var)])
+    b.KILL = set(b.getAllRedefinedVar())
 
-    # Set In and Out for each nodes
+    #Set In and Out for each nodes
     b.IN = [set(graph.expr_collection)]
     b.OUT = [set(graph.expr_collection)]
+    if block == "D":
+        b.GEN = set()
+        b.KILL = set(graph.expr_collection)
+
 
 stopCrit = True
 
@@ -45,7 +45,15 @@ while stopCrit:
             stopCrit = True
 
 # Print last out variable
+print("Out :")
 for block in graph.blocks:
     graph.current = block
     b = graph.getCurrentBlock()
     print(f"Block %s : " % block + ",".join(b.OUT[-1]))
+
+print("In :")
+for block in graph.blocks:
+    graph.current = block
+    b = graph.getCurrentBlock()
+
+    print(f"Block %s : " % block + ",".join(b.IN[-1]))

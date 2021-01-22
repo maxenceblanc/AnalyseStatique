@@ -55,7 +55,12 @@
             ["a", "b*d"],
             ["b", "a-d"]
         ],
-        "succ": [],
+        "succ": ["D"],
         "pred": ["B5"]
+    },
+    "D": {
+        "instructions": [],
+        "succ": [],
+        "pred": ["B8"]
     }
   }

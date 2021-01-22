@@ -8,7 +8,7 @@
     },
     "B2": {
         "instructions": [
-            ["x1", "a+bb-12"]
+            ["x1", "a+bb*12", "bb*12"]
         ],
        "succ": ["B4"],
        "pred": ["B1"]
@@ -16,16 +16,22 @@
     "B3": {
         "instructions": [
            ["a", "a/2"],
-           ["x2", "a+bb-12"]
+           ["x2", "a+bb*12","bb*12"]
         ],
         "succ": ["B4"],
         "pred": ["B1","B3"]
     },
     "B4": {
         "instructions": [
-           ["x3", "bb-12"]
+           ["x3", "bb*12"]
         ],
-        "succ": ["B1","B3"],
+        "succ": ["B1","B3", "D"],
         "pred": ["B2","B3"]
+    },
+    "D": {
+          "instructions": [
+          ],
+          "succ": [],
+          "pred": ["B4"]
     }
   }

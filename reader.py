@@ -130,12 +130,34 @@ class Block():
     def getAllExpression(self):
         """Get every expression of the block (instruction[1])
         """
-        return [instr[1] for instr in self.instructions]
+        redef = []
+        l = []
+
+        for inst in self.instructions:
+            for i in inst[1::]:
+                t = True
+                for j in redef:
+                    if j in i:
+                        t = False
+                if(t):
+                    l.append(i)
+            redef.append(inst[0])
+
+        return l
 
     def getAllRedefinedVar(self):
-        """Get every var redefined in the block (instruction[0])
+        """X or Y defined before use of x op Y in B
         """
-        return [instr[0] for instr in self.instructions]
+        redef = []
+        l = []
+
+        for inst in self.instructions:
+            for i in inst[1::]:
+                for j in redef:
+                    if j in i:
+                        l.append(i)
+            redef.append(inst[0])
+        return l
 
 ####################################################
 ##################| FUNCTIONS |#####################
