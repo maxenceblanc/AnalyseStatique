@@ -38,7 +38,7 @@ class Graph():
         # Initialization
         self.current = None # Block being currently focused, ex: "B1"
 
-        self.expr_collection = list(set([inst[1] for b in self.blocks for inst in self.blocks[b].instructions]))
+        self.expr_collection = list(set([i for b in self.blocks for inst in self.blocks[b].instructions for i in inst[1::]]))
         # ... extra vars for the algorithm
 
 
@@ -128,7 +128,7 @@ class Block():
         return False
 
     def getAllExpression(self):
-        """Get every expression of the block (instruction[1])
+        """expressions used before any operands being redefined in n
         """
         redef = []
         l = []
@@ -146,8 +146,23 @@ class Block():
         return l
 
     def getAllRedefinedVar(self):
-        """X or Y defined before use of x op Y in B
+        """operande writed in N
         """
+        redef = []
+        l = []
+
+        # for inst in self.instructions:
+        #     for i in inst[1::]:
+        #         for j in redef:
+        #             if j in i:
+        #                 l.append(i)
+        #     redef.append(inst[0])
+
+        return [instr[0] for instr in self.instructions]
+
+    def getAllRedefinedVar2(self):
+        """expressions whose operands are redefined in n
+                """
         redef = []
         l = []
 
@@ -158,7 +173,6 @@ class Block():
                         l.append(i)
             redef.append(inst[0])
         return l
-
 ####################################################
 ##################| FUNCTIONS |#####################
 ####################################################

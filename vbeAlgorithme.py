@@ -11,7 +11,8 @@ for block in graph.blocks:
     graph.current = graph.blocks[block].id
     b = graph.getCurrentBlock()
     b.GEN = set(b.getAllExpression())
-    b.KILL = set(b.getAllRedefinedVar())
+    # b.KILL = set(b.getAllRedefinedVar2())
+    b.KILL = set([expr for var in b.getAllRedefinedVar() for expr in graph.getExpressionContain(var)])
 
     #Set In and Out for each nodes
     b.IN = [set(graph.expr_collection)]
