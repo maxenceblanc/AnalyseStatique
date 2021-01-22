@@ -1,0 +1,31 @@
+{
+    "B1":{
+       "instructions": [
+           ["x0", "a+1"]
+       ],
+       "succ": ["B2","B3"],
+       "pred": ["B4"]
+    },
+    "B2": {
+        "instructions": [
+            ["x1", "a+bb-12"]
+        ],
+       "succ": ["B4"],
+       "pred": ["B1"]
+    },
+    "B3": {
+        "instructions": [
+           ["a", "a/2"],
+           ["x2", "a+bb-12"]
+        ],
+        "succ": ["B4"],
+        "pred": ["B1","B3"]
+    },
+    "B4": {
+        "instructions": [
+           ["x3", "bb-12"]
+        ],
+        "succ": ["B1","B3"],
+        "pred": ["B2","B3"]
+    }
+  }

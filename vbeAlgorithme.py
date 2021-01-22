@@ -1,7 +1,7 @@
 #! /usr/bin/env python
-from AnalyseStatique import reader
+import reader
 
-GRAPH_FILE = "graphs/graph.json"
+GRAPH_FILE = "graphs/graph3.json"
 block_dict = reader.parseFile(GRAPH_FILE)
 graph = reader.Graph(block_dict)
 

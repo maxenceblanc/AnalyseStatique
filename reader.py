@@ -79,6 +79,7 @@ class Graph():
         """ Calls the hasExpression() on the current block.
         """
         return self.blocks[self.current].hasExpression(expression)
+        
     def getAllExpressionSelBlock(self):
         return self.blocks[self.current].getAllExpression()
 
@@ -135,6 +136,7 @@ class Block():
         """Get every var redefined in the block (instruction[0])
         """
         return [instr[0] for instr in self.instructions]
+
 ####################################################
 ##################| FUNCTIONS |#####################
 ####################################################
@@ -162,11 +164,6 @@ def parseFile(filename: str):
     return block_dict
 
 
-####################################################
-###################| CONSTANTS |####################
-####################################################
-
-GRAPH_FILE = "graphs/graph.json"
 
 ####################################################
 ####################| PROGRAM |#####################
